@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-spark-green: #1C3D2E;
+  --color-spark-green-light: #2a5a44;
+  --color-spark-gold: #C8963E;
+  --color-spark-gold-light: #d4a955;
+  --color-spark-white: #F9F9F7;
+  --color-spark-dark: #0D1117;
+  --color-spark-overlay: rgba(13, 17, 23, 0.72);
+
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #F9F9F7;
+  color: #1C3D2E;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in oklab, var(--color-spark-gold) 85%, white);
+  outline-offset: 3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}

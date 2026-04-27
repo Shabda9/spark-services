@@ -46,7 +46,7 @@ const phoneHref = "tel:+61200000000";
       :class="[
         isSolid
           ? 'bg-spark-green/95 backdrop-blur supports-[backdrop-filter]:bg-spark-green/85'
-          : 'bg-transparent',
+          : 'bg-gradient-to-b from-spark-dark/85 via-spark-dark/35 to-transparent',
       ]"
     >
       <div class="mx-auto max-w-7xl px-6 lg:px-10">
@@ -58,7 +58,7 @@ const phoneHref = "tel:+61200000000";
             @click="closeMobileMenu"
           >
             <span
-              class="font-heading text-sm font-extrabold tracking-[0.34em] text-white/95 transition-colors group-hover:text-spark-gold"
+              class="font-heading text-sm font-bold tracking-[0.34em] text-white/95 transition-colors group-hover:text-spark-gold"
             >
               SPARK SERVICES
             </span>
@@ -69,7 +69,7 @@ const phoneHref = "tel:+61200000000";
               v-for="item in navItems"
               :key="item.label"
               :to="item.to"
-              class="text-xs font-semibold tracking-[0.22em] text-white/85 transition-colors hover:text-spark-gold"
+              class="text-xs tracking-[0.22em] text-white/85 transition-colors hover:text-spark-gold"
             >
               {{ item.label }}
             </NuxtLink>
@@ -113,37 +113,66 @@ const phoneHref = "tel:+61200000000";
         class="md:hidden"
         :aria-hidden="isMobileMenuOpen ? 'false' : 'true'"
       >
-        <div
-          v-show="isMobileMenuOpen"
-          v-motion
-          :initial="{ opacity: 0, y: -10 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 0.22 } }"
-          :leave="{ opacity: 0, y: -10, transition: { duration: 0.16 } }"
-          class="border-t border-white/10 bg-spark-green"
-        >
-          <div class="mx-auto max-w-7xl px-6 py-5 lg:px-10">
-            <nav class="flex flex-col gap-1.5" aria-label="Mobile">
-              <NuxtLink
-                v-for="item in navItems"
-                :key="item.label"
-                :to="item.to"
-                class="rounded-md px-3 py-3 font-heading text-sm font-bold tracking-wide text-white/90 transition hover:bg-white/10 hover:text-spark-gold"
-                @click="closeMobileMenu"
-              >
-                {{ item.label }}
-              </NuxtLink>
+        <ClientOnly>
+          <div
+            v-show="isMobileMenuOpen"
+            v-motion
+            :initial="{ opacity: 0, y: -10 }"
+            :enter="{ opacity: 1, y: 0, transition: { duration: 0.22 } }"
+            :leave="{ opacity: 0, y: -10, transition: { duration: 0.16 } }"
+            class="border-t border-white/10 bg-spark-green"
+          >
+            <div class="mx-auto max-w-7xl px-6 py-5 lg:px-10">
+              <nav class="flex flex-col gap-1.5" aria-label="Mobile">
+                <NuxtLink
+                  v-for="item in navItems"
+                  :key="item.label"
+                  :to="item.to"
+                  class="rounded-md px-3 py-3 font-heading text-sm font-bold tracking-wide text-white/90 transition hover:bg-white/10 hover:text-spark-gold"
+                  @click="closeMobileMenu"
+                >
+                  {{ item.label }}
+                </NuxtLink>
 
-              <a
-                :href="phoneHref"
-                class="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-3 font-heading text-sm font-bold tracking-wide text-white/90 transition hover:border-white/25 hover:bg-white/10"
-                aria-label="Call Spark Services"
-              >
-                <Phone class="h-4 w-4" aria-hidden="true" />
-                <span>CALL</span>
-              </a>
-            </nav>
+                <a
+                  :href="phoneHref"
+                  class="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-3 font-heading text-sm font-bold tracking-wide text-white/90 transition hover:border-white/25 hover:bg-white/10"
+                  aria-label="Call Spark Services"
+                >
+                  <Phone class="h-4 w-4" aria-hidden="true" />
+                  <span>CALL</span>
+                </a>
+              </nav>
+            </div>
           </div>
-        </div>
+
+          <template #fallback>
+            <div v-show="isMobileMenuOpen" class="border-t border-white/10 bg-spark-green">
+              <div class="mx-auto max-w-7xl px-6 py-5 lg:px-10">
+                <nav class="flex flex-col gap-1.5" aria-label="Mobile">
+                  <NuxtLink
+                    v-for="item in navItems"
+                    :key="item.label"
+                    :to="item.to"
+                    class="rounded-md px-3 py-3 font-heading text-sm font-bold tracking-wide text-white/90 transition hover:bg-white/10 hover:text-spark-gold"
+                    @click="closeMobileMenu"
+                  >
+                    {{ item.label }}
+                  </NuxtLink>
+
+                  <a
+                    :href="phoneHref"
+                    class="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-3 py-3 font-heading text-sm font-bold tracking-wide text-white/90 transition hover:border-white/25 hover:bg-white/10"
+                    aria-label="Call Spark Services"
+                  >
+                    <Phone class="h-4 w-4" aria-hidden="true" />
+                    <span>CALL</span>
+                  </a>
+                </nav>
+              </div>
+            </div>
+          </template>
+        </ClientOnly>
       </div>
     </div>
   </header>
