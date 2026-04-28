@@ -11,6 +11,7 @@ const props = withDefaults(
     subjectPrefix?: string;
     services?: ServiceOption[];
     defaultService?: string;
+    prefillMessage?: string;
   }>(),
   {
     id: "contact",
@@ -20,6 +21,7 @@ const props = withDefaults(
     mailtoTo: "hello@sparkservices.com.au",
     subjectPrefix: "Spark Services enquiry",
     defaultService: "general",
+    prefillMessage: "",
   }
 );
 </script>
@@ -47,6 +49,7 @@ const props = withDefaults(
             :subject-prefix="props.subjectPrefix"
             :services="props.services"
             :default-service="props.defaultService"
+            :prefill-message="props.prefillMessage"
           />
         </div>
       </div>

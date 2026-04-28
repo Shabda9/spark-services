@@ -9,6 +9,8 @@ const props = withDefaults(
     subjectPrefix?: string;
     services?: ServiceOption[];
     defaultService?: string;
+    /** When set (e.g. from removals hero), merged into the message field for mailto body */
+    prefillMessage?: string;
   }>(),
   {
     mailtoTo: "hello@sparkservices.com.au",
@@ -20,6 +22,7 @@ const props = withDefaults(
       { label: "Gardening", value: "gardening" },
     ],
     defaultService: "general",
+    prefillMessage: "",
   }
 );
 
@@ -32,6 +35,20 @@ const form = reactive({
   preferredDateTime: "",
   message: "",
 });
+
+function applyRoutesPrefillBlock(block: string) {
+  const stripped = form.message.replace(/^Moving from:[^\n]*\nMoving to:[^\n]*(\n\n)?/m, "").trim();
+  form.message = stripped ? `${block}\n\n${stripped}` : block;
+}
+
+watch(
+  () => props.prefillMessage,
+  (v) => {
+    const trimmed = typeof v === "string" ? v.trim() : "";
+    if (!trimmed) return;
+    applyRoutesPrefillBlock(trimmed);
+  }
+);
 
 const isServiceOpen = ref(false);
 const serviceActiveIndex = ref(-1);
