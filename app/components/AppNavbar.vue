@@ -33,7 +33,7 @@ const navItems = [
   { label: "Services", to: "/#services" },
   { label: "How It Works", to: "/#how-it-works" },
   { label: "About Us", to: "/about" },
-  { label: "Reviews", to: "/#reviews" },
+  { label: "FAQ", to: "/faq" },
 ] as const;
 
 const phoneHref = "tel:+61200000000";
