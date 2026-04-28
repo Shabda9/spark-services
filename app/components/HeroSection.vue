@@ -52,13 +52,13 @@ import heroImageUrl from "~/assets/images/spark-services-hero.png";
 
           <div class="mt-10 flex w-full flex-wrap items-stretch gap-3 sm:flex-nowrap sm:items-center">
             <div
-              class="inline-flex overflow-hidden rounded-md border border-white/15 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.22)] backdrop-blur"
+              class="inline-flex w-full overflow-hidden rounded-md border border-white/15 bg-white/5 shadow-[0_10px_30px_rgba(0,0,0,0.22)] md:w-auto"
               role="group"
               aria-label="Service selection"
             >
               <NuxtLink
                 to="/cleaning"
-                class="inline-flex h-11 items-center justify-center bg-white px-7 font-heading text-[11px] font-bold tracking-[0.18em] text-spark-dark transition hover:bg-white/90"
+                class="inline-flex h-12 flex-1 items-center justify-center bg-white px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-spark-dark transition hover:bg-white/90 md:min-w-[180px] md:flex-none"
                 aria-label="Cleaning service"
               >
                 CLEANING
@@ -66,7 +66,7 @@ import heroImageUrl from "~/assets/images/spark-services-hero.png";
               <span class="w-px bg-white/12" aria-hidden="true" />
               <NuxtLink
                 to="/removals"
-                class="inline-flex h-11 items-center justify-center px-7 font-heading text-[11px] font-bold tracking-[0.18em] text-white/80 transition hover:bg-white/10 hover:text-white"
+                class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white transition hover:bg-white/10 md:min-w-[180px] md:flex-none"
                 aria-label="Removals service"
               >
                 REMOVALS
@@ -74,20 +74,12 @@ import heroImageUrl from "~/assets/images/spark-services-hero.png";
               <span class="w-px bg-white/12" aria-hidden="true" />
               <NuxtLink
                 to="/#services"
-                class="inline-flex h-11 items-center justify-center px-7 font-heading text-[11px] font-bold tracking-[0.18em] text-white/80 transition hover:bg-white/10 hover:text-white"
+                class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white transition hover:bg-white/10 md:min-w-[180px] md:flex-none"
                 aria-label="Gardening service"
               >
                 GARDENING
               </NuxtLink>
             </div>
-
-            <NuxtLink
-              to="/#quote"
-              class="inline-flex h-11 items-center justify-center rounded-md bg-spark-gold px-6 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-dark shadow-[0_12px_28px_rgba(245,197,66,0.18)] ring-1 ring-white/10 transition hover:bg-spark-gold-light"
-              aria-label="Get a quote"
-            >
-              GET A QUOTE
-            </NuxtLink>
           </div>
         </div>
       </div>
