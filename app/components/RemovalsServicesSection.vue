@@ -17,7 +17,7 @@ const residential: RemovalsService = {
   id: "residential",
   title: "Residential moves",
   description:
-    "Home relocations with careful packing, loading, and placement—whether you are moving across town or into a new neighbourhood.",
+    "Home relocations with careful packing, loading, and placement whether you are moving across town or into a new neighbourhood.",
   startingFrom: 450,
   icon: Home,
   imageUrl: "https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg",
@@ -85,7 +85,7 @@ const ctaBullets = [
           What we can move for you.
         </h2>
         <p class="mt-4 text-base leading-relaxed text-spark-green/70 sm:text-lg">
-          Transparent starting prices—tell us your route and inventory and we will firm up a fixed quote.
+          Transparent starting prices tell us your route and inventory and we will firm up a fixed quote.
         </p>
       </div>
 
@@ -185,7 +185,7 @@ const ctaBullets = [
             <NuxtLink
               :to="quoteHref"
               class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-spark-green"
-              aria-label="View logistics plan — contact us"
+              aria-label="View logistics plan & contact us"
             >
               View logistics plan
               <ArrowRight class="h-4 w-4" :stroke-width="1.5" aria-hidden="true" />
@@ -193,7 +193,6 @@ const ctaBullets = [
           </div>
         </article>
 
-        <!-- Left column: interstate (compact) + local moves — balances height vs centre stack -->
         <div
           class="flex flex-col gap-5 sm:col-span-2 sm:grid sm:grid-cols-2 sm:gap-5 lg:col-span-5 lg:col-start-1 lg:row-start-3 lg:flex lg:flex-col"
         >
@@ -362,7 +361,7 @@ const ctaBullets = [
                 Fixed quotes &amp; clear scope
               </h3>
               <p class="mt-3 text-sm leading-relaxed text-white/70">
-                No mystery surcharges for the work we agree up front—change requests are quoted before we proceed.
+                No mystery surcharges for the work we agree up front change requests are quoted before we proceed.
               </p>
             </div>
 

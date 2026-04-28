@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import {
-  Brush,
-  Building2,
+  ArrowRight,
+  Leaf,
+  Sprout,
+  Trees,
+  Scissors,
+  Trash2,
+  Ruler,
   Droplets,
-  Home,
-  KeyRound,
-  Sparkles,
-  SprayCan,
-  Waves,
+  Shovel,
 } from "lucide-vue-next";
 
-type CleaningService = {
+type GardeningService = {
   id: string;
   title: string;
   description: string;
@@ -19,83 +20,79 @@ type CleaningService = {
   badge?: string;
   imageUrl?: string;
   bullets?: string[];
-  variant?: "light" | "dark";
   accent?: "gold" | "green" | "dark";
 };
 
-const quoteLink = "/#quote";
-const fallbackImageUrl = "https://images.pexels.com/photos/6195277/pexels-photo-6195277.jpeg";
+const quoteLink = "#gardening-contact";
+const fallbackImageUrl = "https://images.pexels.com/photos/18137544/pexels-photo-18137544.jpeg";
 
-const services: CleaningService[] = [
+const services: GardeningService[] = [
   {
-    id: "residential",
-    title: "Residential Cleaning",
-    description:
-      "Routine cleans tailored to your home kitchens, bathrooms, bedrooms, and living areas with meticulous care.",
+    id: "maintenance",
+    title: "Garden maintenance",
+    description: "Regular mowing, edging, and tidy-ups to keep your garden looking sharp week to week.",
     startingFrom: 120,
-    icon: Home,
-    imageUrl: "https://images.pexels.com/photos/6195121/pexels-photo-6195121.jpeg",
-    accent: "gold",
-  },
-  {
-    id: "deep",
-    title: "Deep Cleaning",
-    description:
-      "Intensive restoration for seasonal refreshes or neglected spaces. We reach the places others miss.",
-    startingFrom: 280,
-    icon: Sparkles,
-    badge: "POPULAR",
-    variant: "dark",
-    bullets: ["Inside cabinets & appliances", "Baseboard scrubbing", "Grout & tile steam cleaning"],
-    accent: "dark",
-  },
-  {
-    id: "office",
-    title: "Office & Commercial",
-    description: "Consistent, checklist-based cleaning for workplaces, retail, clinics, and shared spaces.",
-    startingFrom: 250,
-    icon: Building2,
+    icon: Leaf,
+    imageUrl: "https://images.pexels.com/photos/32759035/pexels-photo-32759035.jpeg",
     accent: "green",
   },
   {
-    id: "end_of_lease",
-    title: "End of Lease",
-    description: "Move-out cleaning with detailed inclusions to help support a smooth inspection and handover.",
-    startingFrom: 350,
-    icon: KeyRound,
+    id: "landscaping",
+    title: "Landscaping refresh",
+    description: "Beds, edging, planting, and practical upgrades that lift kerb appeal and usability.",
+    startingFrom: 390,
+    icon: Sprout,
+    badge: "POPULAR",
+    bullets: ["Garden beds & mulch", "Edging & clean lines", "Planting & pruning"],
+    accent: "dark",
+  },
+  {
+    id: "turfing",
+    title: "Turfing & lawn repair",
+    description: "New turf installs and patch repairs for a greener, more even finish.",
+    startingFrom: 650,
+    icon: Scissors,
     accent: "gold",
   },
   {
-    id: "window",
-    title: "Window Cleaning",
-    description: "Streak-free interior and exterior glass, frames, and tracks perfect for inspections and refreshes.",
-    startingFrom: 80,
+    id: "tree_care",
+    title: "Hedges & tree care",
+    description: "Trimming, shaping, and safe tidy-ups with access and clearances in mind.",
+    startingFrom: 220,
+    icon: Trees,
+    accent: "green",
+  },
+  {
+    id: "green_waste",
+    title: "Green waste removal",
+    description: "We clean up after the job and take the green waste with us.",
+    startingFrom: 90,
+    icon: Trash2,
+    accent: "gold",
+  },
+  {
+    id: "weeding",
+    title: "Weeding & garden beds",
+    description: "Detail work for pathways, beds, and hard-to-reach areas finished clean and tidy.",
+    startingFrom: 140,
+    icon: Shovel,
+    accent: "dark",
+  },
+  {
+    id: "pressure_clean",
+    title: "Outdoor tidy & washdown",
+    description: "Quick refresh for patios, paths, and outdoor areas to lift presentation.",
+    startingFrom: 160,
     icon: Droplets,
     accent: "green",
   },
   {
-    id: "carpet_steam",
-    title: "Carpet Steam",
-    description: "Deep extraction for rugs and carpets to lift embedded dirt and help revive fibre appearance.",
-    startingFrom: 140,
-    icon: Waves,
+    id: "edging",
+    title: "Edging & lines",
+    description: "Crisp edges for lawns and borders small detail, big impact.",
+    startingFrom: 80,
+    icon: Ruler,
     accent: "gold",
-  },
-  {
-    id: "post_construction",
-    title: "Post-Construction",
-    description: "Remove dust, debris, and residue after renovations with a thorough final clean and wipe-down.",
-    startingFrom: 380,
-    icon: Brush,
-    accent: "dark",
-  },
-  {
-    id: "strata",
-    title: "Strata & Common Areas",
-    description: "Reliable upkeep for lobbies, stairwells, lifts, hallways, and shared amenities with clear reporting.",
-    startingFrom: 220,
-    icon: SprayCan,
-    accent: "green",
   },
 ];
 
@@ -105,14 +102,14 @@ const tiles = services.slice(2);
 </script>
 
 <template>
-  <section class="mx-auto max-w-7xl px-6 py-10 lg:px-10 lg:py-12" aria-label="Cleaning services">
+  <section class="mx-auto max-w-7xl px-6 py-10 lg:px-10 lg:py-12" aria-label="Gardening services">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="text-[11px] font-semibold tracking-[0.26em] text-spark-green/60">CLEANING SERVICES</p>
+      <p class="text-[11px] font-semibold tracking-[0.26em] text-spark-green/60">GARDENING SERVICES</p>
       <h2 class="mt-3 font-heading text-3xl font-extrabold tracking-tight text-spark-green sm:text-4xl">
-        Choose the clean that fits.
+        Garden care that shows.
       </h2>
       <p class="mt-4 text-base leading-relaxed text-spark-green/70 sm:text-lg">
-        Transparent starting prices and clear inclusions pick what you need and we’ll tailor the details.
+        Choose the service you need then we’ll confirm scope, access, and timing with clear inclusions.
       </p>
     </div>
 
@@ -150,13 +147,18 @@ const tiles = services.slice(2);
             </div>
           </div>
 
-          <div class="mt-7 flex flex-wrap items-center justify-between gap-3">
+          <div class="mt-7 flex justify-end border-t border-spark-green/10 pt-6">
             <NuxtLink
               :to="quoteLink"
-              class="inline-flex h-11 items-center justify-center rounded-md border border-spark-green/20 bg-white px-6 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-green transition hover:border-spark-green/30 hover:bg-spark-green hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-spark-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-              :aria-label="`Get a quote for ${featured.title}`"
+              class="group inline-flex items-center gap-2 font-heading text-[11px] font-extrabold tracking-[0.16em] text-spark-green underline-offset-4 transition hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-spark-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              :aria-label="`Enquire about ${featured.title}`"
             >
-              LEARN MORE
+              ENQUIRE
+              <ArrowRight
+                class="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                :stroke-width="1.75"
+                aria-hidden="true"
+              />
             </NuxtLink>
           </div>
         </div>
@@ -168,13 +170,10 @@ const tiles = services.slice(2);
         <div class="absolute inset-0 bg-[radial-gradient(800px_360px_at_40%_10%,rgba(245,197,66,0.18)_0%,rgba(245,197,66,0.0)_65%)]" aria-hidden="true" />
         <div class="relative p-6 sm:p-8">
           <div class="flex items-start justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <component
-                :is="highlight.icon"
-                class="h-5 w-5 text-white/85"
-                :stroke-width="1.5"
-                aria-hidden="true"
-              />
+            <div class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center" aria-hidden="true">
+                <component :is="highlight.icon" class="h-5 w-5 text-white/85" :stroke-width="1.5" aria-hidden="true" />
+              </span>
               <div>
                 <p v-if="highlight.badge" class="text-[11px] font-semibold tracking-[0.20em] text-white/70">
                   {{ highlight.badge }}
@@ -204,19 +203,21 @@ const tiles = services.slice(2);
                 ${{ highlight.startingFrom }}
               </p>
             </div>
-            <NuxtLink
-              :to="quoteLink"
-              class="inline-flex h-11 items-center justify-center rounded-md bg-white px-6 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-green transition hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-spark-green"
-              :aria-label="`Get a quote for ${highlight.title}`"
-            >
-              LEARN MORE
-            </NuxtLink>
           </div>
+
+          <NuxtLink
+            :to="quoteLink"
+            class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/90 transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-spark-green"
+            aria-label="Get a quote for gardening services"
+          >
+            See inclusions &amp; timings
+            <ArrowRight class="h-4 w-4" :stroke-width="1.5" aria-hidden="true" />
+          </NuxtLink>
         </div>
       </article>
     </div>
 
-    <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:mt-7 lg:grid-cols-3">
+    <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:mt-7 lg:grid-cols-3" aria-label="Additional gardening services">
       <article
         v-for="service in tiles"
         :key="service.id"
@@ -232,12 +233,9 @@ const tiles = services.slice(2);
         />
 
         <div class="flex items-start gap-3">
-          <component
-            :is="service.icon"
-            class="mt-0.5 h-4 w-4 text-spark-green/70"
-            :stroke-width="1.5"
-            aria-hidden="true"
-          />
+          <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center pt-2" aria-hidden="true">
+            <component :is="service.icon" class="h-4 w-4 text-spark-green/70" :stroke-width="1.5" aria-hidden="true" />
+          </span>
           <div class="min-w-0 flex-1">
             <h3 class="font-heading text-lg font-extrabold tracking-tight text-spark-green">
               {{ service.title }}
@@ -251,19 +249,22 @@ const tiles = services.slice(2);
         <div class="mt-6 flex items-center justify-between gap-4 border-t border-spark-green/10 pt-5">
           <div class="inline-flex items-center gap-2">
             <span class="text-[10px] font-semibold tracking-[0.18em] text-spark-green/55">FROM</span>
-            <span
-              class="inline-flex items-center rounded-sm bg-spark-white px-2.5 py-1 font-heading text-sm font-extrabold text-spark-green ring-1 ring-spark-green/10"
-            >
+            <span class="inline-flex items-center rounded-sm bg-spark-white px-2.5 py-1 font-heading text-sm font-extrabold text-spark-green ring-1 ring-spark-green/10">
               ${{ service.startingFrom }}
             </span>
           </div>
 
           <NuxtLink
             :to="quoteLink"
-            class="inline-flex h-10 items-center justify-center border border-spark-green/20 bg-white px-4 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-green transition hover:border-spark-green/30 hover:bg-spark-green hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-spark-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-            :aria-label="`Get a quote for ${service.title}`"
+            class="group inline-flex items-center gap-2 font-heading text-[11px] font-extrabold tracking-[0.16em] text-spark-green underline-offset-4 transition hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-spark-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            :aria-label="`Enquire about ${service.title}`"
           >
-            LEARN MORE
+            ENQUIRE
+            <ArrowRight
+              class="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+              :stroke-width="1.75"
+              aria-hidden="true"
+            />
           </NuxtLink>
         </div>
       </article>

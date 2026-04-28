@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
     role: "Homeowner",
     company: "Inner West",
     content:
-      "Booking was easy and the quote was transparent. Great attention to detail — especially on the kitchen and bathrooms.",
+      "Booking was easy and the quote was transparent. Great attention to detail, especially on the kitchen and bathrooms.",
     rating: 5,
     avatarUrl: "https://randomuser.me/api/portraits/women/44.jpg",
   },

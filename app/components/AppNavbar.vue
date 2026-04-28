@@ -32,7 +32,7 @@ const navItems = [
   { label: "Home", to: "/" },
   { label: "Services", to: "/#services" },
   { label: "How It Works", to: "/#how-it-works" },
-  { label: "Areas", to: "/#areas" },
+  { label: "About Us", to: "/about" },
   { label: "Reviews", to: "/#reviews" },
 ] as const;
 

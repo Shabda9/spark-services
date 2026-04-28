@@ -17,7 +17,7 @@ const props = withDefaults(
     id: "contact",
     tagline: "LET'S SPARK A CONVERSATION",
     title: "Contact us",
-    subtitle: "Tell us what you need — we’ll reply as soon as we can.",
+    subtitle: "Tell us what you need and we’ll reply as soon as we can.",
     mailtoTo: "hello@sparkservices.com.au",
     subjectPrefix: "Spark Services enquiry",
     defaultService: "general",

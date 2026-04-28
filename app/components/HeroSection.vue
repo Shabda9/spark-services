@@ -73,7 +73,7 @@ import heroImageUrl from "~/assets/images/spark-services-hero.png";
               </NuxtLink>
               <span class="w-px bg-white/12" aria-hidden="true" />
               <NuxtLink
-                to="/#services"
+                to="/gardening"
                 class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white transition hover:bg-white/10 md:min-w-[180px] md:flex-none"
                 aria-label="Gardening service"
               >

@@ -7,7 +7,7 @@ type Step = {
 
 const eyebrow = "OUR PROCESS";
 const title = "How it works";
-const subtitle = "A simple, reliable flow from quote to completion — with clear communication at every step.";
+const subtitle = "A simple, reliable flow from quote to completion with clear communication at every step.";
 
 const steps: Step[] = [
   {
