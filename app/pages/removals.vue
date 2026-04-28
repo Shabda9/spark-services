@@ -61,7 +61,7 @@ function onHeroRouteContinue() {
             </h1>
 
             <p class="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-              More service detail and sections are coming soon. Book below or use the form we’ll confirm timing and scope with you.
+              Starting prices and services are outlined below. Book or use the form and we’ll confirm timing and scope with you.
             </p>
 
             <div class="mt-10 flex flex-wrap items-center gap-3">
@@ -95,6 +95,8 @@ function onHeroRouteContinue() {
         </div>
       </div>
     </section>
+    <RemovalsServicesSection />
+    <RemovalsFleetPricingSection />
     <ContactUsSection
       id="removals-contact"
       title="Contact us"
