@@ -61,8 +61,8 @@ const navItems = [
 
 const serviceItems = [
   { label: "Cleaning", to: "/cleaning" },
-  { label: "Removals", to: "/removals" },
-  { label: "Gardening", to: "/gardening" },
+  // { label: "Removals", to: "/removals" },
+  // { label: "Gardening", to: "/gardening" },
 ] as const;
 
 const phoneHref = "tel:+61200000000";
