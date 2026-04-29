@@ -58,7 +58,8 @@ import heroImageUrl from "~/assets/images/spark-services-hero.png";
             >
               <NuxtLink
                 to="/cleaning"
-                class="inline-flex h-12 flex-1 items-center justify-center bg-white px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-spark-dark transition hover:bg-white/90 md:min-w-[180px] md:flex-none"
+                class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white/90 transition duration-200 ease-out hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 active:scale-[0.98] md:min-w-[180px] md:flex-none"
+                exact-active-class="bg-white text-spark-dark"
                 aria-label="Cleaning service"
               >
                 CLEANING
@@ -66,7 +67,8 @@ import heroImageUrl from "~/assets/images/spark-services-hero.png";
               <span class="w-px bg-white/12" aria-hidden="true" />
               <NuxtLink
                 to="/removals"
-                class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white transition hover:bg-white/10 md:min-w-[180px] md:flex-none"
+                class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white/90 transition duration-200 ease-out hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 active:scale-[0.98] md:min-w-[180px] md:flex-none"
+                exact-active-class="bg-white text-spark-dark"
                 aria-label="Removals service"
               >
                 REMOVALS
@@ -74,7 +76,8 @@ import heroImageUrl from "~/assets/images/spark-services-hero.png";
               <span class="w-px bg-white/12" aria-hidden="true" />
               <NuxtLink
                 to="/gardening"
-                class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white transition hover:bg-white/10 md:min-w-[180px] md:flex-none"
+                class="inline-flex h-12 flex-1 items-center justify-center px-8 font-heading text-[12px] font-extrabold tracking-[0.16em] text-white/90 transition duration-200 ease-out hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60 active:scale-[0.98] md:min-w-[180px] md:flex-none"
+                exact-active-class="bg-white text-spark-dark"
                 aria-label="Gardening service"
               >
                 GARDENING
