@@ -4,7 +4,6 @@ import { Building, Home as HomeIcon } from "lucide-vue-next";
 const heroImageUrl = "https://images.pexels.com/photos/6195277/pexels-photo-6195277.jpeg";
 
 const bookingEmail = "hello@sparkservices.com.au";
-const bookingMailto = `mailto:${bookingEmail}?subject=${encodeURIComponent("Cleaning booking request")}`;
 
 type HeroHighlight = {
   title: string;
@@ -71,13 +70,13 @@ const highlights: HeroHighlight[] = [
             </p>
 
             <div class="mt-10 flex flex-wrap items-center gap-3">
-              <a
-                :href="bookingMailto"
+              <NuxtLink
+                to="/booking"
                 class="inline-flex h-11 items-center justify-center rounded-md bg-spark-gold px-6 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-dark shadow-[0_12px_28px_rgba(245,197,66,0.18)] ring-1 ring-white/10 transition hover:bg-spark-gold-light focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-spark-white"
                 aria-label="Book cleaning"
               >
                 BOOK CLEANING
-              </a>
+              </NuxtLink>
             </div>
 
             <div class="mt-10 space-y-4 lg:hidden">

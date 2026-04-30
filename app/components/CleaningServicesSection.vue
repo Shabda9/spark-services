@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import {
-  Brush,
   Building2,
-  Droplets,
   Home,
   KeyRound,
-  Sparkles,
-  SprayCan,
-  Waves,
 } from "lucide-vue-next";
+import { useBookingStore, type BookingExtra, type BookingServiceType } from "~/stores/booking";
+
+type CleaningServiceId =
+  | BookingServiceType
+  | "deep_clean"
+  | "windows"
+  | "carpet"
+  | "post_construction_detail"
+  | "strata_common_areas";
 
 type CleaningService = {
-  id: string;
+  id: CleaningServiceId;
   title: string;
   description: string;
   startingFrom: number;
@@ -23,8 +27,18 @@ type CleaningService = {
   accent?: "gold" | "green" | "dark";
 };
 
-const quoteLink = "/#quote";
 const fallbackImageUrl = "https://images.pexels.com/photos/6195277/pexels-photo-6195277.jpeg";
+const bookingStore = useBookingStore();
+const props = withDefaults(
+  defineProps<{
+    showBookingCta?: boolean;
+    serviceSet?: "all" | "home";
+  }>(),
+  {
+    showBookingCta: false,
+    serviceSet: "all",
+  },
+);
 
 const services: CleaningService[] = [
   {
@@ -36,18 +50,6 @@ const services: CleaningService[] = [
     icon: Home,
     imageUrl: "https://images.pexels.com/photos/6195121/pexels-photo-6195121.jpeg",
     accent: "gold",
-  },
-  {
-    id: "deep",
-    title: "Deep Cleaning",
-    description:
-      "Intensive restoration for seasonal refreshes or neglected spaces. We reach the places others miss.",
-    startingFrom: 280,
-    icon: Sparkles,
-    badge: "POPULAR",
-    variant: "dark",
-    bullets: ["Inside cabinets & appliances", "Baseboard scrubbing", "Grout & tile steam cleaning"],
-    accent: "dark",
   },
   {
     id: "office",
@@ -63,45 +65,59 @@ const services: CleaningService[] = [
     description: "Move-out cleaning with detailed inclusions to help support a smooth inspection and handover.",
     startingFrom: 350,
     icon: KeyRound,
+    badge: "POPULAR",
+    bullets: ["Bond-back focused inclusions", "Inspection-ready detail work", "Easy extras in booking flow"],
     accent: "gold",
-  },
-  {
-    id: "window",
-    title: "Window Cleaning",
-    description: "Streak-free interior and exterior glass, frames, and tracks perfect for inspections and refreshes.",
-    startingFrom: 80,
-    icon: Droplets,
-    accent: "green",
-  },
-  {
-    id: "carpet_steam",
-    title: "Carpet Steam",
-    description: "Deep extraction for rugs and carpets to lift embedded dirt and help revive fibre appearance.",
-    startingFrom: 140,
-    icon: Waves,
-    accent: "gold",
-  },
-  {
-    id: "post_construction",
-    title: "Post-Construction",
-    description: "Remove dust, debris, and residue after renovations with a thorough final clean and wipe-down.",
-    startingFrom: 380,
-    icon: Brush,
-    accent: "dark",
-  },
-  {
-    id: "strata",
-    title: "Strata & Common Areas",
-    description: "Reliable upkeep for lobbies, stairwells, lifts, hallways, and shared amenities with clear reporting.",
-    startingFrom: 220,
-    icon: SprayCan,
-    accent: "green",
   },
 ];
 
-const featured = services[0]!;
-const highlight = services[1]!;
-const tiles = services.slice(2);
+const displayedServices = computed(() => {
+  if (props.serviceSet === "home") {
+    return services.filter((service) => service.id === "residential" || service.id === "end_of_lease");
+  }
+
+  return services;
+});
+
+const featured = computed(() => displayedServices.value[0]!);
+const highlight = computed(() => displayedServices.value[displayedServices.value.length - 1]!);
+const tiles = computed(() => displayedServices.value.slice(1, -1));
+
+function bookingSelection(serviceId: CleaningServiceId): { serviceType: BookingServiceType; extra?: BookingExtra } {
+  if (serviceId === "deep_clean") return { serviceType: "residential", extra: "deep_clean" };
+  if (serviceId === "windows") return { serviceType: "residential", extra: "windows" };
+  if (serviceId === "carpet") return { serviceType: "residential", extra: "carpet" };
+  if (serviceId === "post_construction_detail") return { serviceType: "residential", extra: "post_construction_detail" };
+  if (serviceId === "strata_common_areas") return { serviceType: "office", extra: "strata_common_areas" };
+  return { serviceType: serviceId };
+}
+
+function quoteTo(serviceId: CleaningServiceId) {
+  const selection = bookingSelection(serviceId);
+  return {
+    path: "/booking",
+    query: selection.extra ? { service: selection.serviceType, extra: selection.extra } : { service: selection.serviceType },
+  };
+}
+
+function quoteAnchorTo() {
+  return {
+    path: "/cleaning",
+  };
+}
+
+function captureIntent(serviceId: CleaningServiceId) {
+  const selection = bookingSelection(serviceId);
+
+  bookingStore.setBasics({
+    serviceType: selection.serviceType,
+    location: bookingStore.location,
+  });
+
+  if (selection.extra && !bookingStore.extras.includes(selection.extra)) {
+    bookingStore.toggleExtra(selection.extra);
+  }
+}
 </script>
 
 <template>
@@ -152,11 +168,12 @@ const tiles = services.slice(2);
 
           <div class="mt-7 flex flex-wrap items-center justify-between gap-3">
             <NuxtLink
-              :to="quoteLink"
+              :to="quoteTo(featured.id)"
               class="inline-flex h-11 items-center justify-center rounded-md border border-spark-green/20 bg-white px-6 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-green transition hover:border-spark-green/30 hover:bg-spark-green hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-spark-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               :aria-label="`Get a quote for ${featured.title}`"
+              @click="captureIntent(featured.id)"
             >
-              LEARN MORE
+              GET QUOTE
             </NuxtLink>
           </div>
         </div>
@@ -205,18 +222,19 @@ const tiles = services.slice(2);
               </p>
             </div>
             <NuxtLink
-              :to="quoteLink"
+              :to="quoteTo(highlight.id)"
               class="inline-flex h-11 items-center justify-center rounded-md bg-white px-6 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-green transition hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-spark-green"
               :aria-label="`Get a quote for ${highlight.title}`"
+              @click="captureIntent(highlight.id)"
             >
-              LEARN MORE
+              GET QUOTE
             </NuxtLink>
           </div>
         </div>
       </article>
     </div>
 
-    <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:mt-7 lg:grid-cols-3">
+    <div v-if="tiles.length" class="mt-6 grid gap-5 sm:grid-cols-2 lg:mt-7 lg:grid-cols-3">
       <article
         v-for="service in tiles"
         :key="service.id"
@@ -259,15 +277,26 @@ const tiles = services.slice(2);
           </div>
 
           <NuxtLink
-            :to="quoteLink"
+            :to="quoteTo(service.id)"
             class="inline-flex h-10 items-center justify-center border border-spark-green/20 bg-white px-4 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-green transition hover:border-spark-green/30 hover:bg-spark-green hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-spark-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             :aria-label="`Get a quote for ${service.title}`"
+            @click="captureIntent(service.id)"
           >
-            LEARN MORE
+            GET QUOTE
           </NuxtLink>
         </div>
       </article>
     </div>
+
+    <SectionCtaBand
+      v-if="props.showBookingCta"
+      eyebrow="NOT SURE WHAT FITS?"
+      title="Click view all services for all remaining services."
+      description="Build a quote from the full booking flow and choose the cleaning option that matches your property."
+      button-label="VIEW ALL SERVICES"
+      :to="quoteAnchorTo()"
+      aria-label="View all remaining services in the booking flow"
+    />
   </section>
 </template>
 

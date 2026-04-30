@@ -23,7 +23,7 @@ const footerCols = [
   {
     title: "Support",
     links: [
-      { label: "Contact Support", to: "/#quote" },
+      { label: "Contact Support", to: "/booking" },
       { label: "Help Center", to: "/help" },
       { label: "Partner Login", to: "/partner" },
     ],

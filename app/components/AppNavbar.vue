@@ -153,7 +153,7 @@ const phoneHref = "tel:+61200000000";
             </a>
 
             <NuxtLink
-              to="/#quote"
+              to="/booking"
               class="inline-flex h-10 items-center justify-center rounded-md bg-spark-gold px-4 font-heading text-xs font-extrabold tracking-[0.18em] text-spark-dark transition hover:bg-spark-gold-light focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-spark-green"
               aria-label="Get a quote"
               @click="closeMobileMenu"

@@ -71,7 +71,7 @@ const bundles: Bundle[] = [
 
         <div class="mt-auto border-t border-spark-green/10 bg-spark-white/40 p-6 sm:p-7">
           <NuxtLink
-            to="/#quote"
+            to="/booking"
             class="inline-flex h-11 w-full items-center justify-center rounded-md border border-spark-green/20 bg-white px-6 font-heading text-[11px] font-extrabold tracking-[0.18em] text-spark-green transition hover:border-spark-green/30 hover:bg-spark-green hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-spark-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             aria-label="Select bundle"
           >

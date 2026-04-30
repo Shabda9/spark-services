@@ -4,6 +4,7 @@
 .nuxt
 .nitro
 .cache
+.eslintcache
 .agent
 .cursor
 .vscode
@@ -20,8 +21,22 @@ logs
 .DS_Store
 .fleet
 .idea
+*.tmp
+*.temp
 
 # Local env files
 .env
 .env.*
 !.env.example
+
+# Backend build/runtime outputs
+backend/dist
+backend/node_modules
+backend/tmp
+backend/*.log
+backend/*.out.log
+backend/*.err.log
+backend/tsconfig.tsbuildinfo
+backend/.env
+backend/.env.*
+!backend/.env.example
