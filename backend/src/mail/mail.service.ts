@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import Handlebars from "handlebars";
-import nodemailer, { type Transporter } from "nodemailer";
+import { Resend } from "resend";
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { BOOKING_SERVICE_PRICING } from "../booking/constants";
@@ -17,28 +17,27 @@ type SendBookingQuoteInput = {
 @Injectable()
 export class MailService {
   private readonly logger = new Logger(MailService.name);
-  private readonly transporter: Transporter;
+  private readonly resend: Resend;
   private readonly quoteTemplate = Handlebars.compile(quoteEmailTemplate);
 
   constructor(private readonly config: ConfigService) {
-    this.transporter = nodemailer.createTransport({
-      host: this.config.get<string>("SMTP_HOST"),
-      port: this.config.get<number>("SMTP_PORT", 587),
-      secure: this.config.get<string>("SMTP_SECURE", "false") === "true",
-      auth: {
-        user: this.config.get<string>("SMTP_USER"),
-        pass: this.config.get<string>("SMTP_PASS"),
-      },
-    });
+    const apiKey = this.config.get<string>("RESEND_API_KEY");
+
+    if (!apiKey) {
+      throw new Error("RESEND_API_KEY is not configured.");
+    }
+
+    this.resend = new Resend(apiKey);
   }
 
   async sendBookingQuote({ booking, estimate, pdfBase64 }: SendBookingQuoteInput): Promise<void> {
     const pdfBytes = Buffer.byteLength(pdfBase64, "base64");
     const debugSavePdf = this.config.get<string>("DEBUG_SAVE_PDF", "false") === "true";
     const service = BOOKING_SERVICE_PRICING[booking.serviceType];
+    const from = this.config.get<string>("MAIL_FROM", "Spark Services <onboarding@resend.dev>");
 
     this.logger.log(
-      `Sending quote email to ${booking.contact.email} using ${this.config.get<string>("SMTP_HOST")} with PDF ${pdfBytes} bytes`,
+      `Sending quote email to ${booking.contact.email} using Resend with PDF ${pdfBytes} bytes`,
     );
 
     if (debugSavePdf) {
@@ -58,8 +57,8 @@ export class MailService {
       estimate,
     });
 
-    await this.transporter.sendMail({
-      from: this.config.get<string>("MAIL_FROM", "Spark Services <quotes@sparkservices.com.au>"),
+    const { data, error } = await this.resend.emails.send({
+      from,
       to: booking.contact.email,
       subject: "Your Spark Services Quote",
       html,
@@ -67,13 +66,15 @@ export class MailService {
         {
           filename: "spark-services-quote.pdf",
           content: pdfBase64,
-          encoding: "base64",
-          contentType: "application/pdf",
-          contentDisposition: "attachment",
         },
       ],
     });
 
-    this.logger.log(`Quote email accepted by SMTP for ${booking.contact.email}`);
+    if (error) {
+      this.logger.error(`Resend rejected quote email for ${booking.contact.email}: ${error.message}`);
+      throw new Error(error.message);
+    }
+
+    this.logger.log(`Quote email accepted by Resend for ${booking.contact.email} (${data?.id ?? "no-id"})`);
   }
 }

@@ -8,6 +8,6 @@ export class HealthController {
   @Get()
   @HttpCode(HttpStatus.OK)
   health() {
-    return this.bookingService.getQueueHealth();
+    return this.bookingService.getHealth();
   }
 }

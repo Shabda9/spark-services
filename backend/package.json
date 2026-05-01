@@ -12,23 +12,20 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@nestjs/bullmq": "^11.0.4",
     "@nestjs/common": "^11.1.9",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.9",
     "@nestjs/platform-express": "^11.1.9",
-    "bullmq": "^5.66.0",
     "handlebars": "^4.7.8",
-    "nodemailer": "^7.0.11",
     "pdfkit": "^0.17.2",
     "reflect-metadata": "^0.2.2",
+    "resend": "^6.2.0",
     "rxjs": "^7.8.2",
     "zod": "^4.4.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.14",
     "@types/node": "^24.0.0",
-    "@types/nodemailer": "^7.0.4",
     "@types/pdfkit": "^0.17.5",
     "typescript": "^6.0.3"
   }
