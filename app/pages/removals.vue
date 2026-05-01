@@ -6,16 +6,8 @@ const bookingMailto = `mailto:${bookingEmail}?subject=${encodeURIComponent("Remo
 
 const heroPickup = ref("");
 const heroDropoff = ref("");
-const contactPrefillMessage = ref("");
-
-function buildRoutePrefillMessage() {
-  const from = heroPickup.value.trim();
-  const to = heroDropoff.value.trim();
-  return `Moving from: ${from || "(not provided)"}\nMoving to: ${to || "(not provided)"}`;
-}
 
 function onHeroRouteContinue() {
-  contactPrefillMessage.value = buildRoutePrefillMessage();
   nextTick(() => {
     document.getElementById("removals-contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -102,10 +94,6 @@ function onHeroRouteContinue() {
       title="Contact us"
       tagline="LET'S SPARK A CONVERSATION"
       subtitle="Share a few details and we’ll get back to you."
-      :mailto-to="bookingEmail"
-      subject-prefix="Removals enquiry"
-      default-service="removals"
-      :prefill-message="contactPrefillMessage"
     />
   </main>
 </template>

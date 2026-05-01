@@ -135,9 +135,6 @@ const highlights: HeroHighlight[] = [
       title="Contact us"
       tagline="LET'S SPARK A CONVERSATION"
       subtitle="Share a few details and we’ll get back to you."
-      :mailto-to="bookingEmail"
-      subject-prefix="Gardening enquiry"
-      default-service="gardening"
     />
   </main>
 </template>

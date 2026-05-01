@@ -11,8 +11,6 @@ import ContactUsSection from "~/components/ContactUsSection.vue";
       title="Still have questions?"
       tagline="LET'S SPARK A CONVERSATION"
       subtitle="Send us a message and we’ll get back to you."
-      subject-prefix="FAQ enquiry"
-      default-service="general"
     />
   </main>
 </template>

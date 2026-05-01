@@ -3,8 +3,6 @@ import { Building, Home as HomeIcon } from "lucide-vue-next";
 
 const heroImageUrl = "https://images.pexels.com/photos/6195277/pexels-photo-6195277.jpeg";
 
-const bookingEmail = "hello@sparkservices.com.au";
-
 type HeroHighlight = {
   title: string;
   description: string;
@@ -131,9 +129,6 @@ const highlights: HeroHighlight[] = [
       title="Contact us"
       tagline="LET'S SPARK A CONVERSATION"
       subtitle="Share a few details and we’ll get back to you."
-      :mailto-to="bookingEmail"
-      subject-prefix="Cleaning enquiry"
-      default-service="cleaning"
     />
   </main>
 </template>

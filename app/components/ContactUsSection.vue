@@ -1,28 +1,17 @@
 <script setup lang="ts">
-type ServiceOption = { label: string; value: string };
-
 const props = withDefaults(
   defineProps<{
     id?: string;
     tagline?: string;
     title?: string;
     subtitle?: string;
-    mailtoTo?: string;
-    subjectPrefix?: string;
-    services?: ServiceOption[];
-    defaultService?: string;
-    prefillMessage?: string;
   }>(),
   {
     id: "contact",
     tagline: "LET'S SPARK A CONVERSATION",
     title: "Contact us",
-    subtitle: "Tell us what you need and we’ll reply as soon as we can.",
-    mailtoTo: "hello@sparkservices.com.au",
-    subjectPrefix: "Spark Services enquiry",
-    defaultService: "general",
-    prefillMessage: "",
-  }
+    subtitle: "Tell us what you need and we'll reply as soon as we can.",
+  },
 );
 </script>
 
@@ -42,18 +31,11 @@ const props = withDefaults(
         </p>
       </div>
 
-      <div class="mx-auto mt-10 max-w-3xl">
-        <div class="overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_18px_55px_rgba(0,0,0,0.20)] backdrop-blur-md sm:p-8">
-          <ContactUsForm
-            :mailto-to="props.mailtoTo"
-            :subject-prefix="props.subjectPrefix"
-            :services="props.services"
-            :default-service="props.defaultService"
-            :prefill-message="props.prefillMessage"
-          />
+      <div class="mx-auto mt-10 max-w-4xl">
+        <div class="overflow-hidden rounded-lg border border-white/10 bg-white/5 p-5 shadow-[0_18px_55px_rgba(0,0,0,0.20)] backdrop-blur-md sm:p-8">
+          <ContactUsForm />
         </div>
       </div>
     </div>
   </section>
 </template>
-

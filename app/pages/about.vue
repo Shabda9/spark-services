@@ -9,10 +9,7 @@
       id="about-contact"
       title="Contact us"
       tagline="LET'S SPARK A CONVERSATION"
-      subtitle="Tell us what you need and we’ll reply as soon as we can."
-      subject-prefix="About Spark Services"
-      default-service="general"
+      subtitle="Tell us what you need and we'll reply as soon as we can."
     />
   </main>
 </template>
-
