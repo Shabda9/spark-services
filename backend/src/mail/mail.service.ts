@@ -35,9 +35,12 @@ export class MailService {
     const debugSavePdf = this.config.get<string>("DEBUG_SAVE_PDF", "false") === "true";
     const service = BOOKING_SERVICE_PRICING[booking.serviceType];
     const from = this.config.get<string>("MAIL_FROM", "Spark Services <onboarding@resend.dev>");
+    const testRecipient = this.config.get<string>("QUOTE_TEST_RECIPIENT")?.trim();
+    const recipient = testRecipient || booking.contact.email;
+    const subjectPrefix = testRecipient ? "[DEV] " : "";
 
     this.logger.log(
-      `Sending quote email to ${booking.contact.email} using Resend with PDF ${pdfBytes} bytes`,
+      `Sending quote email to ${recipient} using Resend with PDF ${pdfBytes} bytes`,
     );
 
     if (debugSavePdf) {
@@ -55,12 +58,14 @@ export class MailService {
       bathrooms: booking.bathrooms,
       extras: booking.extras.length ? booking.extras.join(", ") : "None",
       estimate,
+      customerEmail: booking.contact.email,
+      testRecipient,
     });
 
     const { data, error } = await this.resend.emails.send({
       from,
-      to: booking.contact.email,
-      subject: "Your Spark Services Quote",
+      to: recipient,
+      subject: `${subjectPrefix}Your Spark Services Quote`,
       html,
       attachments: [
         {
@@ -71,10 +76,10 @@ export class MailService {
     });
 
     if (error) {
-      this.logger.error(`Resend rejected quote email for ${booking.contact.email}: ${error.message}`);
+      this.logger.error(`Resend rejected quote email for ${recipient}: ${error.message}`);
       throw new Error(error.message);
     }
 
-    this.logger.log(`Quote email accepted by Resend for ${booking.contact.email} (${data?.id ?? "no-id"})`);
+    this.logger.log(`Quote email accepted by Resend for ${recipient} (${data?.id ?? "no-id"})`);
   }
 }
