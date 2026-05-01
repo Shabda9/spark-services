@@ -34,7 +34,7 @@ const selectedCleaningService = computed(() => {
   return serviceOptions.find((service) => service.value === form.serviceType && service.value !== "general_cleaning") ?? null;
 });
 
-const isGeneralEnquiry = computed(() => form.serviceType === "general_cleaning");
+const isGeneralEnquiry = computed(() => !form.serviceType || form.serviceType === "general_cleaning");
 
 function validateGeneralEnquiry() {
   const nextErrors: ContactErrors = {};
@@ -56,7 +56,7 @@ function validateGeneralEnquiry() {
 }
 
 async function submitEnquiry() {
-  if (!isGeneralEnquiry.value || !validateGeneralEnquiry()) return;
+  if (!validateGeneralEnquiry()) return;
 
   isSubmitting.value = true;
   errors.value = {};
@@ -254,7 +254,7 @@ async function continueToBooking() {
       </button>
 
       <p v-if="!form.serviceType" class="text-center text-xs text-white/55">
-        Choose a cleaning service to continue to booking, or choose general enquiry to send a message.
+        Send a general message now, or choose a cleaning service above to continue to booking.
       </p>
     </form>
   </div>
