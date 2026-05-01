@@ -14,7 +14,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  const port = config.get<number>("PORT", 4000);
+  const port = Number(process.env.PORT) || 4000;
   await app.listen(port);
 
   logger.log(`Started from ${process.cwd()}`);
