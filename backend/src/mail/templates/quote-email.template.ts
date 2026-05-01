@@ -5,6 +5,9 @@ export const quoteEmailTemplate = `
     <h1 style="margin: 0 0 16px;">Your Spark Services Quote</h1>
     <p>Hi {{name}},</p>
     <p>Your quote for <strong>{{serviceType}}</strong> is ready.</p>
+    {{#if testRecipient}}
+      <p><strong>Dev test send:</strong> the customer entered {{customerEmail}}, but this email was routed to {{testRecipient}}.</p>
+    {{/if}}
     <ul>
       <li>Bedrooms: {{bedrooms}}</li>
       <li>Bathrooms: {{bathrooms}}</li>

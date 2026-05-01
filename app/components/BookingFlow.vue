@@ -112,7 +112,7 @@ async function submitBooking() {
   submitError.value = "";
 
   try {
-    const response = await $fetch<{ success: true; queued: true; estimate: number }>("/api/booking", {
+    const response = await $fetch<{ success: true; emailSent: true; estimate: number }>("/api/booking", {
       method: "POST",
       body: {
         serviceType: booking.serviceType,
@@ -128,7 +128,7 @@ async function submitBooking() {
       },
     });
 
-    quoteNumber.value = response.queued ? "Your quote request" : "";
+    quoteNumber.value = response.emailSent ? "Your quote request" : "";
   } catch {
     submitError.value = "We could not prepare the quote just now. Please try again.";
   } finally {

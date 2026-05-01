@@ -1,32 +1,35 @@
 import { Injectable } from "@nestjs/common";
-import { InjectQueue } from "@nestjs/bullmq";
-import type { Queue } from "bullmq";
-import { BOOKING_EXTRA_PRICING, BOOKING_QUEUE, BOOKING_SERVICE_PRICING, SEND_EMAIL_JOB } from "./constants";
+import { BOOKING_EXTRA_PRICING, BOOKING_SERVICE_PRICING } from "./constants";
 import type { CreateBookingDto } from "./dto/create-booking.dto";
+import { BookingPdfService } from "./pdf/booking-pdf.service";
+import { MailService } from "../mail/mail.service";
 
-export type BookingAcceptedResponse = {
+export type BookingQuoteResponse = {
   success: true;
-  queued: true;
+  emailSent: true;
   estimate: number;
 };
 
 @Injectable()
 export class BookingService {
   constructor(
-    @InjectQueue(BOOKING_QUEUE) private readonly bookingQueue: Queue,
+    private readonly bookingPdfService: BookingPdfService,
+    private readonly mailService: MailService,
   ) {}
 
-  async createBooking(booking: CreateBookingDto): Promise<BookingAcceptedResponse> {
+  async createBooking(booking: CreateBookingDto): Promise<BookingQuoteResponse> {
     const estimate = this.calculateEstimate(booking);
+    const pdfBuffer = await this.bookingPdfService.generateQuotePdf(booking, estimate);
 
-    await this.bookingQueue.add(SEND_EMAIL_JOB, {
+    await this.mailService.sendBookingQuote({
       booking,
       estimate,
+      pdfBase64: pdfBuffer.toString("base64"),
     });
 
     return {
       success: true,
-      queued: true,
+      emailSent: true,
       estimate,
     };
   }
@@ -40,18 +43,10 @@ export class BookingService {
     return service.base + bedroomTotal + bathroomTotal + extrasTotal;
   }
 
-  async getQueueHealth() {
-    const client = await this.bookingQueue.client;
-    const [redis, counts] = await Promise.all([
-      client.ping(),
-      this.bookingQueue.getJobCounts("waiting", "active", "completed", "failed", "delayed"),
-    ]);
-
+  getHealth() {
     return {
       api: "ok",
-      redis,
-      queue: BOOKING_QUEUE,
-      counts,
+      booking: "ok",
     };
   }
 }

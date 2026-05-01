@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post } from "@nestjs/common";
-import { BookingService, type BookingAcceptedResponse } from "./booking.service";
+import { BookingService, type BookingQuoteResponse } from "./booking.service";
 import { createBookingSchema, type CreateBookingDto } from "./dto/create-booking.dto";
 import { ZodValidationPipe } from "../common/pipes/zod-validation.pipe";
 
@@ -8,16 +8,16 @@ export class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 
   @Post()
-  @HttpCode(HttpStatus.ACCEPTED)
+  @HttpCode(HttpStatus.OK)
   createBooking(
     @Body(new ZodValidationPipe(createBookingSchema)) body: CreateBookingDto,
-  ): Promise<BookingAcceptedResponse> {
+  ): Promise<BookingQuoteResponse> {
     return this.bookingService.createBooking(body);
   }
 
   @Get("health")
   @HttpCode(HttpStatus.OK)
   health() {
-    return this.bookingService.getQueueHealth();
+    return this.bookingService.getHealth();
   }
 }

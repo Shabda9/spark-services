@@ -1,6 +1,3 @@
-export const BOOKING_QUEUE = "booking";
-export const SEND_EMAIL_JOB = "send-email";
-
 export const BOOKING_SERVICE_TYPES = [
   "residential",
   "office",
